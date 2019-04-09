@@ -1,0 +1,64 @@
+body {
+  background-image: url("../images/background_catalog.jpg");
+  background-size: auto;
+  background-position: center;
+  background-color: black;
+}
+
+.head {
+  margin: 0;
+}
+
+#newAddition {
+  background-image: url("../images/catalog_new.jpg");
+  background-size: cover;
+  height: 600px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 0;
+  animation: fadein 1.5s;
+}
+
+#newAddition #newContent {
+  float: left;
+  color: white;
+  padding-left: 2em;
+}
+
+#classicsSpecial {
+  text-align: center;
+  margin-bottom: 0;
+  padding: 1.5em;
+  padding-bottom: 0.5em;
+}
+
+.panel {
+  background-color: rgb(200, 200, 200);
+}
+
+.overlayed {
+  position: relative;
+  float: right;
+}
+
+.col-md-9 {
+  margin-top: 0.5em;
+}
+
+.col-md-3 {
+  margin-top: 0.5em;
+}
+
+.amount {
+  height: 20px;
+  width: 40px;
+  float: right;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  } to {
+    opacity: 1;
+  }
+}

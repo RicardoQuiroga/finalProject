@@ -1,0 +1,17 @@
+body {
+			background-image: url("../images/background_index.jpg");
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+}
+
+main {
+	background-color: #272b30;
+	height: 80vh;
+	width: 80vw;
+	overflow: auto;
+	margin: 0px auto;
+	padding: 20px;
+	border-radius: 25px;
+	color: white;
+}

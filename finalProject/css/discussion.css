@@ -1,0 +1,63 @@
+body {
+	background-image: url("../images/background_discussion.jpg");
+	background-size: auto;
+	color: black;
+}
+
+legend {
+	text-align: center;
+}
+
+textarea{
+	resize: none;
+	background-color: #576782;
+	height: 250px;
+	width: 300px;
+	color: white;
+}
+
+fieldset {
+	text-align: center;
+}
+
+label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 250px;
+    text-align: right;
+    padding-right: 30px;
+}
+
+input {
+  display: inline-block;
+  float: left;
+  text-align: left;
+  color: white;
+}
+
+.main {
+	background-color: #272b30;
+	height: 80vh;
+	width: 80vw;
+	overflow: auto;
+	margin: 0px auto;
+	border-radius: 25px;
+	color: white;
+}
+
+.inputfield {
+	background-color: #576782;
+}
+
+.comment {
+	border-bottom: 1px solid white;
+	margin-bottom: 10px;
+}
+
+.commentdiv {
+	margin: 30px auto;
+	width: 50%;
+	height: 100px;
+	text-align: center;
+}

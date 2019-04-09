@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang = en>
+<head>
+	<meta charset="utf-8">
+	<title>Discussion</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/flatly/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/general.css">
+	<link rel="stylesheet" type="text/css" href="css/order.css">
+	<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+</head>
+<body>
+	<div class="head">
+		<h1>ORDER</h1>
+		<h2>You need bread? We'll get you bread.</h2>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid" id="nav1">
+			    <ul class="nav navbar-nav">
+			      	<li><a href="index.html">Home</a></li>
+       				<li><a href="catalog.html">Catalog</a></li>
+        			<li><a href="discussion.html">Discussion</a></li>
+        			<li><a href="order.html">Order</a></li>
+        			<li><a href="about.html">About Us</a></li>
+			    </ul>
+			</div>
+		</nav>
+	</div>
+		
+	<main>
+		<div class="main">
+				<form method="get" action="http://examples.funwebdev.com/process.php">
+					<fieldset>
+						<legend>What would you like to order?</legend>
+						<div id = "textinputs">
+							<label id="namelabel">Name:</label>
+							<input type="text" placeholder = "Name" name = "nameinput" id = "nameinput" class = "inputfield"><br>
+							<label id="addresslabel">Address:</label>
+							<input type="text" placeholder = "1234 Example St." name = "addressinput" id = "addressinput" class="inputfield"><br>
+							<label id="ziplabel">ZIP:</label>
+							<input type="text" placeholder="12345" name = "zipinput" id="zipinput" class = "inputfield"><br>
+						</div>
+						<br>
+						
+						<div id = "checkboxinput">
+							<div class = "columnGrouping">
+								<div class = "group">
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="wholewheat">Whole Wheat
+								    <select class="form-control" name = "wheatAmount" id="wheatAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="white">White Bread
+								    <select class="form-control" name = "whiteAmount" id="whiteAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="italian">Italian Bread
+								    <select class="form-control" name="italianAmount" id="italianAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="french">French Bread
+								    <select class="form-control" name="frenchAmount" id="frenchAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="raisin">Raisin Bread
+								    <select class="form-control" name="raisinAmount" id="raisinAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								  </div>
+								  <div class="group">
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="sourdough">Sourdough Bread
+								    <select class="form-control" name="sourdoughAmount" id="sourdoughAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="cinammon">Cinnamon Bread
+								    <select class="form-control" name = "cinnamonAmount" id="cinnamonAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="multigrain">Multigrain Bread
+								   <select class="form-control" name = "multigrainAmount" id="multigrainAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								    <input type="checkbox" class = "form-check-input" name="breadbox[]" value="ryepump">Rye/Pumpernickle Bread
+								    <select class="form-control" name = "ryepumpAmount" id="ryepumpAmount">
+								        <option>0</option>
+								        <option>1</option>
+								        <option>2</option>
+								        <option>3</option>
+								        <option>4</option>
+								        <option>5</option>
+								      </select> <br>
+								  </div>
+								</div>
+						    <input type="submit" name="submit" class="btn btn-primary">
+						</div>
+					</fieldset>
+				</form>
+		</div>
+	</main>
+
+</body>
+<footer>
+	<p>Jacob Ackerman and Ricky Quiroga 2019<br>
+	CS3500 Team 9</p>
+</footer>
+</html>

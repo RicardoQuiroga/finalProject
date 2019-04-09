@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang = en>
+<head>
+	<meta charset="utf-8">
+	<title>Discussion</title>
+	<link rel="stylesheet" type="text/css" href="https://bootswatch.com/3/flatly/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/general.css">
+	<link rel="stylesheet" type="text/css" href="css/discussion.css">
+	<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+
+	<script type = "text/javascript" src = "JavaScript/addComment.js"></script>
+</head>
+<body>
+	<div class="head">
+		<h1>DISCUSSION</h1>
+		<h2>Find Like-Minded Bread Enthusiasts :^)</h2>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid" id="nav1">
+			    <ul class="nav navbar-nav">
+			      	<li><a href="index.html">Home</a></li>
+			        <li><a href="catalog.html">Catalog</a></li>
+			        <li><a href="discussion.html">Discussion</a></li>
+			        <li><a href="order.html">Order</a></li>
+			        <li><a href="about.html">About Us</a></li>
+			    </ul>
+			</div>
+		</nav>
+	</div>
+	<main>
+		<div class="main">
+			<div id = "comments">
+			<fieldset class = "comment">
+				<legend>Sample Name</legend>
+				<p>I am a troll, I do not like bread. Please ignore me.</p>
+			</fieldset>
+
+			<fieldset class = "comment" id = "lastComment">
+				<legend>Breadboy1994</legend>
+				<p>Bread is my life, I don't know how I'd live without bread. Thank you for the opportunity to talk about bread because all I eat is bread. </p>
+			</fieldset>
+			</div>
+			
+			<div class="commentdiv">
+				<form>
+					<fieldset class = "form-group">
+						<legend>Add your opinion:</legend>
+					    <div class="form-group">
+						    <label class="col-form-label" for="inputDefault">Name:</label>
+  							<input type="text" class="form-control" placeholder="John Smith" id="inputDefault">
+  						</div>
+  						<div class="form-group">
+						    <label for="commentTextarea">Comment:</label>
+						    <textarea class="form-control" id="commentTextarea" rows="3"></textarea>
+						</div>
+						    <button type="button" class="btn btn-primary" onClick="AddComment()">Submit</button>
+						</div>		
+					</fieldset>
+
+				</form>
+    		</div>
+		</div>
+	</main>
+<footer>
+	<p>Jacob Ackerman and Ricky Quiroga 2019<br>
+	CS3500 Team 9</p>
+</footer>
+</body>
+</html>

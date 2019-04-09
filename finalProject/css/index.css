@@ -1,0 +1,62 @@
+body {
+  background-image: url("../images/background_index.jpg");
+  background-size: auto;
+  background-position: center;
+}
+
+.panel {
+  margin-left: 2em;
+  margin-top: 2em;
+  margin-right: 2em;
+  padding: 0;
+}
+
+#eyeCatcher {
+  background-image: url("../images/index_new.jpg");
+  background-size: cover;
+  height: 600px;
+  margin-top: 4.5em;
+  border: none;
+  background-position: center;
+  background-repeat: no-repeat;
+	transition: 1.5s;
+	animation: fadein 1.5s;
+}
+
+#eyeCatcherTop {
+  margin-left: 2em;
+}
+
+#eyeCatcherTop h6 {
+  color: gold;
+  margin-bottom: 0;
+  padding-bottom: 0.5em;
+}
+
+#eyeCatcherTop #addition {
+  color: white;
+  font-size: 300%;
+}
+
+#eyeCatcherTop #subText {
+  color: white;
+  font-size: 175%;
+}
+
+#eyeCatcherBottom {
+	margin-left: 2em;
+	color: white;
+
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	} to {
+		opacity: 1;
+	}
+}
+
+.panel {
+  border-radius: 0;
+}
