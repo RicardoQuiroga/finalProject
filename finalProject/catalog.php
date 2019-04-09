@@ -59,6 +59,30 @@
 		</div>
 		<div class="row">
 			<div class="col-md-9">
+				<?php
+					$test = array("Whole Wheat", "White", "Italian", "French", "Raisin", "Sourdough", "Cinnamon", "Multigrain", "Rye/Pumpernickel");
+					$rowCount = 0;
+
+					foreach($test as $val) {
+						//CREATE NEW ROW AFTER 2 ENTRIES IN CURRENT ROW
+						if ($rowCount % 2 == 0) {
+							echo '<div class="row">';
+						}
+						//CREATE NEW PANEL AND FILL WITH VALUES (THIS IS NOT FINISHED)
+						echo '<div class="col-md-6">';
+						echo '<div class="panel panel-default">';
+						echo '<div class="panel-body">';
+						echo '<p style="text-align: center; font-size: 200%;"><strong>' . $val . '</strong></p>';
+						echo $rowCount % 2;
+						echo '</div>';
+						echo '</div>';
+						echo '</div>';
+						if (++$rowCount % 2 == 0 && $rowCount != 0) {
+							echo '</div>';
+						}
+					}
+				?>
+			<!--
 				<div class="row">
 					<div class="col-md-6">
 						<div class="panel panel-default" id="Whole Wheat">
@@ -206,6 +230,7 @@
 							</div>
 						</div>
 					</div>
+				-->
 				</div>
 			</div>
 			<div class="col-md-3">
