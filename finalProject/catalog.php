@@ -1,3 +1,54 @@
+<?php
+define('DBHOST', 'localhost');
+define('DBName', 'bread');
+define('DBUSER', 'root');
+define('DBPASS', '');
+define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
+
+function fillCatalog($catalog) {
+	$rowCount = 0;
+
+	try {
+		$pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS);
+		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		$sql = 'select * from ' . $catalog;
+		$result = $pdo -> query($sql);
+		while ($row = $result -> fetch()) {
+			//CREATE NEW ROW AFTER 2 ENTRIES IN CURRENT ROW
+			if ($rowCount % 2 == 0) {
+				echo '<div class="row">';
+			}
+
+			echo '<div class="col-md-6">';
+			echo '<div class="panel panel-default" id="' . $row['Name'] . '">';
+			echo '<div class="panel-body">';
+			echo '<p style="text-align: center; font-size: 250%;"><strong>' . $row['Name'] . '</strong></p>';
+			echo '<img src = "images/catalog_' . $row['Path'] . '" class="img-responsive center-block" Title="' . $row['Name'] . '" alt="' . $row['Name'] . '" />';
+			echo '<p><strong>Additional types:</strong> ' . $row['Additional'] . '<br><br></p>';
+			echo '<p><strong>Description:</strong> ' . $row['Description'] . '<br><br></p>';
+			echo '</div>';
+			echo '</div>';
+			echo '</div>';
+
+			if (++$rowCount % 2 == 0 && $rowCount != 0) {
+				echo '</div>';
+			}
+		}
+		$pdo = null;
+		echo '<div class="col-md-6">';
+		echo '<div class="panel panel-default">';
+		echo '<div class="panel-body">';
+		echo '<p style="font-size: 200%;">Have any suggestions? Feel from to email them to us! Find our contact info on the About Us page.</p>';
+		echo '</div>';
+		echo '</div>';
+		echo '</div>';
+	} catch (PDOException $e) {
+		echo 'database connection failed...';
+		die($d -> getMessage());
+	}
+}
+?>
 <!DOCTYPE html>
 <html lang=en>
 
@@ -60,177 +111,8 @@
 		<div class="row">
 			<div class="col-md-9">
 				<?php
-					$test = array("Whole Wheat", "White", "Italian", "French", "Raisin", "Sourdough", "Cinnamon", "Multigrain", "Rye/Pumpernickel");
-					$rowCount = 0;
-
-					foreach($test as $val) {
-						//CREATE NEW ROW AFTER 2 ENTRIES IN CURRENT ROW
-						if ($rowCount % 2 == 0) {
-							echo '<div class="row">';
-						}
-						//CREATE NEW PANEL AND FILL WITH VALUES (THIS IS NOT FINISHED)
-						echo '<div class="col-md-6">';
-						echo '<div class="panel panel-default">';
-						echo '<div class="panel-body">';
-						echo '<p style="text-align: center; font-size: 200%;"><strong>' . $val . '</strong></p>';
-						echo $rowCount % 2;
-						echo '</div>';
-						echo '</div>';
-						echo '</div>';
-						if (++$rowCount % 2 == 0 && $rowCount != 0) {
-							echo '</div>';
-						}
-					}
+					fillCatalog("catalogClassic");
 				?>
-			<!--
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default" id="Whole Wheat">
-							<div class="panel-body">
-								<p style="text-align: center; font-size: 300%;"><strong>Whole wheat</strong></p>
-								<img src="images/catalog_wholeWheat.jpg" class="img-responsive center-block" Title="Whole Wheat" alt="Whole Wheat" />
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> Also referred to as "wholemeal bread" outside the US. This type is made
-									from flour that is milled (partially or entirely) from whole wheat grains. Depending on
-									where you buy your whole wheat bread from, actual wheat germ content
-									may vary. Most wheat bread you see in stores is actually white bread that has added caramel coloring.<br><br></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default" id="White">
-							<div class="panel-body">
-								<img src="images/catalog_white.jpg" class="img-responsive center-block" Title="White" alt="White" />
-								<p><strong>Bread name:</strong> White</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> This bread is made from wheat flour that
-									has had it's germ layers removed during milling. Since these germ layers
-									prohibit longer shelf lives, white bread is able to last much longer.
-									Fun fact! After the introduction of certain mandates made by the
-									government made in the mid 1900's, white bread has contributed to a major
-									decline in nutrition deficiencies in the US due to added acid fortifications to make it more
-									nutritious.<br></p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default" id="Italian">
-							<div class="panel-body">
-								<img src="images/catalog_italian.jpg" class="img-responsive center-block" Title="Italian" alt="Italian" />
-								<p><strong>Bread name:</strong> Italian</p>
-								<p><strong>Popular types:</strong> Ciabatta, Focaccia, Filoncino,
-									Rosetta, Grissini, Piadina, Freselle, Schiaccia, Taralli<br><br></p>
-								<p><strong>Description:</strong> Italian bread is known for its thin
-									crust and moist interior. While wheat flour is an essential ingredient,
-									different compositions of yeast, lard, salt, and oils make for an
-									assormtent of different kinds. Served alongside other foods,
-									the absorbancy of italian bread can be used to soak up oils and sauces.<br><br></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default" id="French">
-							<div class="panel-body">
-								<img src="images/catalog_french.jpg" class="img-responsive center-block" Title="French" alt="French" />
-								<p><strong>Bread name:</strong> French</p>
-								<p><strong>Popular types:</strong> Baguette, Ficelle, Brioche,
-									Fougasse, Tartine, Pain Rond, Croissant.<br><br></p>
-								<p><strong>Description:</strong> Typically viewed as a long, thin stick,
-									french bread has created it's own distinction amongst its flower
-									based friends. French bread is traditionally served as a starter,
-									before main dishes are served. While non-traditional french bread
-									made in other parts of the world (including here) contains other
-									additives, French law prohibits the use of any added oils or fats in their bread making.</td><br></p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default" id="Raisin">
-							<div class="panel-body">
-								<img src="images/catalog_raisin.jpg" class="img-responsive center-block" Title="Raisin" alt="Raisin" />
-								<p><strong>Bread name:</strong> Raisin</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> Raisin bread is one of the sweeter
-									inclusions that is commonly consumed in the US. It's fairly easy
-									to find the defining factor that makes this type unique...Raisin!
-									Due to the aesthetic of a sliced piece of raisin bread,
-									many have used it to describe an assortment of scientific
-									phenomena, ranging from the expansion of the universe to the appearance of an atom.</td><br></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default" id="Sourdough">
-							<div class="panel-body">
-								<img src="images/catalog_sourdough.jpg" class="img-responsive center-block" Title="Sourdough" alt="Sourdough" />
-								<p><strong>Bread name:</strong> Sourdough</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> Sourdough distinguishes itself
-									from others due to it's sour taste that is not commonly found
-									in other breads. This sourness, to put it most simply comes from
-									letting the dough ferment.<br><br><br></p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default" id="Cinnamon">
-							<div class="panel-body">
-								<img src="images/catalog_cinnamon.jpg" class="img-responsive center-block" Title="Cinnamon" alt="Cinnamon" />
-								<p><strong>Bread name:</strong> Cinnamon</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> More of a confectionary than something
-									you'd want to use for your sandwich, cinnamon bread is widely made
-									of the same basic ingredients of other common breads, but with a
-									whole bunch of cinnamon, making for a tasty treat.<br><br></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default" id="Multigrain">
-							<div class="panel-body">
-								<img src="images/catalog_oat.jpg" class="img-responsive center-block" Title="Multigrain" alt="Multigrain" />
-								<p><strong>Bread name:</strong> Multigrain</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> Multigrain bread is as simple
-									as it sounds; It is a type of bread consisting of multiple grain
-									types. Be it oat, barley, wheat, they can be combined every which
-									way. Adding some seeds into the mix can add even more variety to an
-									already varying bunch of breads.<br><br></p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default" id="Rye">
-							<div class="panel-body">
-								<img src="images/catalog_rye.jpg" class="img-responsive center-block" Title="Rye" alt="Rye" />
-								<img src="images/catalog_newTag.png" class="overlayed" />
-								<p><strong>Bread name:</strong> Rye/Pumpernickel</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> Rye bread ignores the ever-present
-									popularity of wheat grain for <em>rye grain</em> flour. This
-									switch makes rye much more dense and dark than other breads.
-									It also makes for a much healthier bread, as it contains more
-									fiber and less calories than its competitors.<br><br></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<p style="font-size: 200%">Have any suggestions? Feel from to email us!
-									Find our contact info on the About Us page.</p>
-							</div>
-						</div>
-					</div>
-				-->
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -269,94 +151,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-9">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-body" id="Flatbread">
-								<img src="images/catalog_flatbread.jpg" class="img-responsive center-block" title="Flatbread" alt="Cornbread" />
-								<p><strong>Bread name:</strong> Flatbread</p>
-								<p><strong>Popular types:</strong> Tortilla, Pita, Naan, Frybread,
-									Chepati, Lavash, Matzah<br><br></p>
-								<p><strong>Description:</strong> Flatbread is one of the most simple
-									to make on this list. Requiring minimal ingredients, flatbreads can
-									be prepared in a multitude of different fashions, be it baked, fried,
-									or anything in between. Dating back to ancient humans, some
-									form of flatbread has been a staple of most cultures around the world.<br></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-body" id="Bagel">
-								<img src="images/catalog_bagel.jpg" class="img-responsive center-block" title="Bagel" alt="Bagel" />
-								<p><strong>Bread name:</strong> Bagel</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> Needing no introduction, the bagel's
-									distinctive shape leaves no room for mistake. Formed into a circle
-									with a hole in the middle, bagels undergo a relatively specific baking
-									process. To ensure it's soft inside and crisp outer crust, the dough is first
-									boiled (or steamed in mass production), and then baked after the boiling.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-body" id="Pretzel">
-								<img src="images/catalog_pretzel.jpg" class="img-responsive center-block" title="Pretzel" alt="Pretzel" />
-								<p><strong>Bread name:</strong> Pretzel</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> Pretzel bread comes in a variety of
-									shapes and sizes. Whether it be in the signature twisted knot or
-									loaf form, small or large, soft or hard, the pretzel is very recognizable.
-									Pretzel bread undergoes a specific treatment using washing soda
-									or lye to give it its unique skin.<br></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-body" id="Pasta">
-								<img src="images/catalog_pasta.jpg" class="img-responsive center-block" title="Pasta" alt="Pasta" />
-								<p><strong>Bread name:</strong> Pasta</p>
-								<p><strong>Popular types:</strong> Fusilli, Spaghetti, Fettuccine,
-									Linguine, Penne, Cannelloni, Tagliatelle, Tortellini, Rigatoni<br><br></p>
-								<p><strong>Description:</strong> While it may not be immediately
-									apparent, pasta does qualify as a bread! Coming in an array of
-									shapes and sizes, most pasta we come across is of the "dried"
-									variety. However, "fresh" pasta can be made witha few ingredients,
-									and the process can be expedited with machines to help mix/shape.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-body" id="Cornbread">
-								<img src="images/catalog_cornbread.jpg" class="img-responsive center-block" title="Cornbread" alt="Cornbread" />
-								<p><strong>Bread name:</strong> Cornbread</p>
-								<p><strong>Additional types:</strong> N/A<br><br></p>
-								<p><strong>Description:</strong> Cornbread is made using cornmeal, and
-									can be fried, cooked, or steamed, though each method will provide a
-									slightly different texture. It became commonplace in areas where
-									wheat flour was more expensive. Southern US cornbread often contains
-									little to no sugar, while the further north you go, cornbread becomes
-									a much sweeter addition to a meal.<br></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="panel panel-default">
-							<div class="panel-body">
-								<p style="font-size: 200%">Have any suggestions? Feel from to email us!
-									Find our contact info on the About Us page.</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<?php
+				fillCatalog("CatalogSpecial");
+				?>
 			</div>
+		</div>
 			<div class="col-md-3">
 				<div class="panel panel-default" id="orderPanel">
 					<div class="panel-heading">
