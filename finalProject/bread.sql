@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `CatalogClassic`;
 CREATE TABLE `CatalogClassic` (
   `BreadID` INTEGER NOT NULL,
   `Name` VARCHAR(50),
-  `Additional` VARCHAR(50),
+  `Additional` LONGTEXT,
   `Path` VARCHAR(50),
   `Description` LONGTEXT,
   PRIMARY KEY (`BreadID`)
@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS `CatalogSpecial`;
 CREATE TABLE `CatalogSpecial` (
   `BreadID` INTEGER NOT NULL,
   `Name` VARCHAR(50),
-  `Additional` VARCHAR(50),
+  `Additional` LONGTEXT,
   `Path` VARCHAR(50),
   `Description` LONGTEXT,
   PRIMARY KEY (`BreadID`)
