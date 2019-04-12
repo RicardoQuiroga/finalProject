@@ -73,7 +73,7 @@ function fillCatalog($catalog) {
 					<li><a href="index.php">Home</a></li>
 					<li><a href="catalog.php">Catalog</a></li>
 					<li><a href="discussion.html">Discussion</a></li>
-					<li><a href="order.html">Order</a></li>
+					<li><a href="order.php">Order</a></li>
 					<li><a href="about.html">About Us</a></li>
 				</ul>
 			</div>
