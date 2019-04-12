@@ -1,3 +1,14 @@
+<?php
+define('DBHOST', 'localhost');
+define('DBNAME', 'bread');
+define('DBUSER', 'testuser');
+define('DBPASS', 'mypassword');
+define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+if ( mysqli_connect_errno() ) {
+	die( mysqli_connect_error() );
+}
+?>
 <!DOCTYPE html>
 <html lang = en>
 <head>
@@ -20,7 +31,7 @@
 			    <ul class="nav navbar-nav">
 			      	<li><a href="index.php">Home</a></li>
 			        <li><a href="catalog.php">Catalog</a></li>
-			        <li><a href="discussion.html">Discussion</a></li>
+			        <li><a href="discussion.php">Discussion</a></li>
 			        <li><a href="order.php">Order</a></li>
 			        <li><a href="about.html">About Us</a></li>
 			    </ul>
@@ -30,15 +41,18 @@
 	<main>
 		<div class="main">
 			<div id = "comments">
-			<fieldset class = "comment">
-				<legend>Sample Name</legend>
-				<p>I am a troll, I do not like bread. Please ignore me.</p>
-			</fieldset>
-
-			<fieldset class = "comment" id = "lastComment">
-				<legend>Breadboy1994</legend>
-				<p>Bread is my life, I don't know how I'd live without bread. Thank you for the opportunity to talk about bread because all I eat is bread. </p>
-			</fieldset>
+				<?php
+				$sql = 'SELECT UserName, Comment FROM comments';
+				if ($result = mysqli_query($connection, $sql)) {
+                    while($row = mysqli_fetch_assoc($result)){
+                    	echo '<fieldset class = "comment">';
+                    	echo "<legend>" . $row["UserName"] . "</legend>";
+                    	echo "<p>" . $row['Comment'] . "</p>";
+                    	echo '</fieldset>';
+                    }
+                    mysqli_free_result($result);
+                }
+				?>
 			</div>
 
 			<div class="commentdiv">

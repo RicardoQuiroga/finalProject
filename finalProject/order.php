@@ -1,3 +1,14 @@
+<?php
+define('DBHOST', 'localhost');
+define('DBNAME', 'bread');
+define('DBUSER', 'testuser');
+define('DBPASS', 'mypassword');
+define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
+$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+if ( mysqli_connect_errno() ) {
+	die( mysqli_connect_error() );
+}
+?>
 <!DOCTYPE html>
 <html lang = en>
 <head>
@@ -19,7 +30,7 @@
 			    <ul class="nav navbar-nav">
 			      	<li><a href="index.php">Home</a></li>
        				<li><a href="catalog.php">Catalog</a></li>
-        			<li><a href="discussion.html">Discussion</a></li>
+        			<li><a href="discussion.php">Discussion</a></li>
         			<li><a href="order.php">Order</a></li>
         			<li><a href="about.html">About Us</a></li>
 			    </ul>
@@ -42,16 +53,6 @@
 						</div>
 						<br>
 						<?php
-							define('DBHOST', 'localhost');
-							define('DBNAME', 'bread');
-							define('DBUSER', 'testuser');
-							define('DBPASS', 'mypassword');
-							define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
-							$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
-                              if ( mysqli_connect_errno() ) {
-                                die( mysqli_connect_error() );
-                              }
-
 							$sql = 'SELECT * FROM catalogclassic';
 
 							echo '<div id = "checkboxinput">';
