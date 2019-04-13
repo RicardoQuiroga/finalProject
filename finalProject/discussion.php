@@ -56,18 +56,18 @@ if ( mysqli_connect_errno() ) {
 			</div>
 
 			<div class="commentdiv">
-				<form>
+				<form name ="commentInput" action = "comment.php" method="post">
 					<fieldset class = "form-group">
 						<legend>Add your opinion:</legend>
 					    <div class="form-group">
 						    <label class="col-form-label" for="inputDefault">Name:</label>
-  							<input type="text" class="form-control" placeholder="John Smith" id="inputDefault">
+  							<input type="text" class="form-control" name="name" placeholder="John Smith" id="inputDefault">
   						</div>
   						<div class="form-group">
 						    <label for="commentTextarea">Comment:</label>
-						    <textarea class="form-control" id="commentTextarea" rows="3"></textarea>
+						    <textarea class="form-control" name = "comment" id="commentTextarea" rows="3"></textarea>
 						</div>
-						    <button type="button" class="btn btn-primary" onClick="AddComment()">Submit</button>
+						    <button type="submit" name= "submit" class="btn btn-primary" onClick="AddComment()">Submit</button>
 						</div>
 					</fieldset>
 
