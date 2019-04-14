@@ -4,8 +4,9 @@ define('DBName', 'bread');
 define('DBUSER', 'root');
 define('DBPASS', '');
 define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
+$collapseCounter;
 
-function fillCatalog($catalog) {
+function fillCatalog($catalog, $counter) {
 	$rowCount = 0;
 
 	try {
@@ -21,16 +22,25 @@ function fillCatalog($catalog) {
 			}
 
 			echo '<div class="col-md-6">';
+			echo '<div class="panel-group">';
 			echo '<div class="panel panel-default" id="' . $row['Name'] . '">';
-			echo '<div class="panel-body">';
+
+			echo '<div class="panel-heading">';
 			echo '<p style="text-align: center; font-size: 250%;"><strong>' . $row['Name'] . '</strong></p>';
+			echo '<a data-toggle="collapse" href="#collapse' . $counter . '">';
 			echo '<img src = "images/catalog_' . $row['Path'] . '" class="img-responsive center-block" Title="' . $row['Name'] . '" alt="' . $row['Name'] . '" />';
+			echo '</a>';
+			echo '</div>';
+
+			echo '<div id="collapse' . $counter . '" class="panel-collapse collapse">';
 			echo '<p><strong>Additional types:</strong> ' . $row['Additional'] . '<br><br></p>';
 			echo '<p><strong>Description:</strong> ' . $row['Description'] . '<br><br></p>';
 			echo '</div>';
-			echo '</div>';
-			echo '</div>';
 
+			echo '</div>';
+			echo '</div>';
+			echo '</div>';
+			$counter++;
 			if (++$rowCount % 2 == 0 && $rowCount != 0) {
 				echo '</div>';
 			}
@@ -47,6 +57,7 @@ function fillCatalog($catalog) {
 		echo 'database connection failed...';
 		die($d -> getMessage());
 	}
+	$collapseCounter = $counter++;
 }
 ?>
 <!DOCTYPE html>
@@ -61,6 +72,7 @@ function fillCatalog($catalog) {
 	<link rel="stylesheet" type="text/css" href="css/catalog.css">
 	<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -111,7 +123,7 @@ function fillCatalog($catalog) {
 		<div class="row">
 			<div class="col-md-9">
 				<?php
-					fillCatalog("catalogClassic");
+					fillCatalog("catalogClassic", 0);
 				?>
 				</div>
 			</div>
@@ -152,7 +164,7 @@ function fillCatalog($catalog) {
 		<div class="row">
 			<div class="col-md-9">
 				<?php
-				fillCatalog("CatalogSpecial");
+				fillCatalog("CatalogSpecial", 10);
 				?>
 			</div>
 		</div>
@@ -169,6 +181,7 @@ function fillCatalog($catalog) {
 				</div>
 			</div>
 		</div>
+	</div>
 		<footer>Jacob Ackerman and Ricky Quiroga 2019<br>CS3500 Team 9</footer>
 	</main>
 </body>
