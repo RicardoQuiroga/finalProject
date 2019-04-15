@@ -42,7 +42,7 @@
 							<br>
 							<br>
 							<br>
-							<a href="catalog.html#specialSection">View (in development)</a></p>
+							<a href="catalog.php#specialSection">View (in development)</a></p>
 					</div>
 				</div>
 				<div class="panel panel-default">
@@ -56,7 +56,7 @@
 							you for the opportunity to talk about bread because all I eat is bread.
 							<br>
 							<br>
-							<a href="discussion.html">Go to discussion...</a>
+							<a href="discussion.php">Go to discussion...</a>
 						</p>
 					</div>
 				</div>
@@ -69,7 +69,7 @@
 						<h1 id="subText">Rye/Pumpernickel</h1>
 					</div>
 					<div class="container-fluid" class="fixed-bottom" id="eyeCatcherBottom">
-						<h2><br><a href="catalog.html#Rye">View in catalog</a></h2>
+						<h2><br><a href="catalog.php#Rye">View in catalog</a></h2>
 					</div>
 				</div>
 			</div>

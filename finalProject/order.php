@@ -73,7 +73,7 @@ function inputValuesVal($row) {
 																	echo "<br>";
 	                                echo "<input type='checkbox' class = 'form-check-input' name = 'breadbox[]' value='" .$row['Name'] . "'>" . $row['Name'];
 																	echo "<br>";
-	                                echo "<input type='number' class='form-control' name = '" . $row['Name'] . "Amount' id = '" . $row['Name'] . "Amount' value=" . inputValuesVal($row) . ">";
+	                                echo "<input type='number' class='form-control' name = '" . $row['Name'] . "Amount' id = '" . $row['Name'] . "Amount' value=" . inputValuesVal($row) . " min='0' max='5'>";
 	                                echo '<br>';
 	                                if($i == 3){
 	                                	echo '</div>';
