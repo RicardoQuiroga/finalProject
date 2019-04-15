@@ -1,9 +1,9 @@
 <?php
 define('DBHOST', 'localhost');
-define('DBName', 'bread');
-define('DBUSER', 'root');
-define('DBPASS', '');
-define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
+define('DBName', 'id9307686_bread');
+define('DBUSER', 'id9307686_breaduser');
+define('DBPASS', '12345');
+define('DBCONNSTRING', 'mysql:host=localhost;dbname=id9307686_bread;charset=utf8mb4;');
 
 function fillCatalog($catalog, $counter) {
 	$rowCount = 0;
@@ -55,7 +55,7 @@ function fillCatalog($catalog, $counter) {
 		echo '</div>';
 	} catch (PDOException $e) {
 		echo 'database connection failed...';
-		die($d -> getMessage());
+		die($d -> getMessage($e));
 	}
 }
 

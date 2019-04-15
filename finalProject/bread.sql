@@ -1,8 +1,7 @@
-DROP DATABASE IF EXISTS `bread`;
-CREATE DATABASE IF NOT EXISTS `bread`;
-USE `bread`;
-
-DROP TABLE IF EXISTS `CatalogClassic`;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 CREATE TABLE `CatalogClassic` (
   `BreadID` INTEGER NOT NULL,
@@ -25,7 +24,7 @@ INSERT INTO `CatalogClassic` (`BreadID`, `Name`, `Additional`, `Path`, `Descript
 INSERT INTO `CatalogClassic` (`BreadID`, `Name`, `Additional`, `Path`, `Description`) VALUES (8, "Multigrain", "N/A", "oat", "Multigrain bread is as simple as it sounds; It is a type of bread consisting of multiple grain types. Be it oat, barley, wheat, they can be combined every which way. Adding some seeds into the mix can add even more variety to an already varying bunch of breads.");
 INSERT INTO `CatalogClassic` (`BreadID`, `Name`, `Additional`, `Path`, `Description`) VALUES (9, "Rye", "N/A", "rye", "Rye bread ignores the ever-present popularity of wheat grain for <em>rye grain</em> flour. This switch makes rye much more dense and dark than other breads. It also makes for a much healthier bread, as it contains more fiber and less calories than its competitors.");
 
-DROP TABLE IF EXISTS `CatalogSpecial`;
+
 
 CREATE TABLE `CatalogSpecial` (
   `BreadID` INTEGER NOT NULL,

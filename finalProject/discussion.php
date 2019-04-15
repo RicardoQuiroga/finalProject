@@ -1,8 +1,8 @@
 <?php
 define('DBHOST', 'localhost');
-define('DBNAME', 'bread');
-define('DBUSER', 'testuser');
-define('DBPASS', 'mypassword');
+define('DBNAME', 'id9307686_bread');
+define('DBUSER', 'id9307686_breaduser');
+define('DBPASS', '12345');
 define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
 $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
 if ( mysqli_connect_errno() ) {
