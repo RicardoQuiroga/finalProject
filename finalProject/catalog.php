@@ -4,7 +4,6 @@ define('DBName', 'bread');
 define('DBUSER', 'root');
 define('DBPASS', '');
 define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
-$collapseCounter;
 
 function fillCatalog($catalog, $counter) {
 	$rowCount = 0;
@@ -24,19 +23,20 @@ function fillCatalog($catalog, $counter) {
 			echo '<div class="col-md-6">';
 			echo '<div class="panel-group">';
 			echo '<div class="panel panel-default" id="' . $row['Name'] . '">';
-
 			echo '<div class="panel-heading">';
 			echo '<p style="text-align: center; font-size: 250%;"><strong>' . $row['Name'] . '</strong></p>';
 			echo '<a data-toggle="collapse" href="#collapse' . $counter . '">';
-			echo '<img src = "images/catalog_' . $row['Path'] . '" class="img-responsive center-block" Title="' . $row['Name'] . '" alt="' . $row['Name'] . '" />';
+			echo '<img src = "images/catalog_' . $row['Path'] . '.jpg" class="img-responsive center-block" Title="' . $row['Name'] . '" alt="' . $row['Name'] . '" />';
 			echo '</a>';
 			echo '</div>';
-
 			echo '<div id="collapse' . $counter . '" class="panel-collapse collapse">';
-			echo '<p><strong>Additional types:</strong> ' . $row['Additional'] . '<br><br></p>';
-			echo '<p><strong>Description:</strong> ' . $row['Description'] . '<br><br></p>';
+			echo '<p><strong>Additional types:</strong> ' . $row['Additional'] . '<br></p>';
+			echo '<br><p><strong>Description:</strong> ' . $row['Description'] . '<br></p>';
+			echo '<div id="cartButtons" style="text-align: right; padding-right: 1em; padding-bottom: 1em"><p><strong>Add to cart </strong></p>';
+			echo '<button type="button" class="btn btn-primary" id="' . $row['Path'] . '" style="margin-right: 0.5em;" onClick="cartAdd(this.id)">+</button>';
+			echo '<button type="button" class="btn btn-primary" id="' . $row['Path'] . '" onClick="cartRem(this.id)">-</button>';
 			echo '</div>';
-
+			echo '</div>';
 			echo '</div>';
 			echo '</div>';
 			echo '</div>';
@@ -57,7 +57,33 @@ function fillCatalog($catalog, $counter) {
 		echo 'database connection failed...';
 		die($d -> getMessage());
 	}
-	$collapseCounter = $counter++;
+}
+
+function fillCart($catalog) {
+	$rowCount = 0;
+
+	try {
+		$pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS);
+		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+		$sql = 'select * from ' . $catalog;
+		$result = $pdo -> query($sql);
+		while ($row = $result -> fetch()) {
+			if ($rowCount % 2 == 0) {
+				echo '<div class="row">';
+			}
+			echo '<div class="col-md-6">';
+			echo $row['Name'] . '<div><input type="number" name="' . $row['Path'] . 'Num" id="' . $row['Path'] . 'Num" min="0" value="0" max="5"></div>';
+			echo '</div>';
+			if (++$rowCount % 2 == 0 && $rowCount != 0) {
+				echo '</div>';
+			}
+		}
+		$pdo = null;
+	} catch (PDOException $e) {
+		echo 'database connection failed...';
+		die($d -> getMessage());
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -73,6 +99,7 @@ function fillCatalog($catalog, $counter) {
 	<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<script type = "text/javascript" src = "JavaScript/catalogCart.js"></script>
 </head>
 
 <body>
@@ -133,15 +160,21 @@ function fillCatalog($catalog, $counter) {
 						<p><strong>CS3500's Bread Catalog</strong></p>
 					</div>
 					<div class="panel-body">
-						<p>We've worked very hard to find the most popular types of bread that
-							are found and bought in the United States, and put them here for you
-							to learn a little bit more about each. Feel free to got to our discussion
-							page to talk about your favorites, or go to our order page to buy something!<br><br></p>
-						<p><a href="discussion.html"><button class="btn btn-primary">Go to discussions</button></a> <a href="order.html"><button class="btn btn-primary">Checkout</button></a></p>
-					</div>
+						<p>Below is your cart. Feel free to add or subtract breads to purchase! (Note: all breads are ordered by the loaf)</p>
+						<form action="order.php" method="post">
+							<br>
+							<?php
+							fillCart("catalogClassic");
+							?>
+								<div class="col-md-6">
+									<br><button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</div>
+						</form>
 				</div>
 			</div>
 		</div>
+	</div>
 
 		<div class="jumbotron" id="classicsSpecial">
 			<div class="container" id="specialSection" style="text-align: center; margin-bottom: 0;">
@@ -185,5 +218,4 @@ function fillCatalog($catalog, $counter) {
 		<footer>Jacob Ackerman and Ricky Quiroga 2019<br>CS3500 Team 9</footer>
 	</main>
 </body>
-
 </html>

@@ -8,6 +8,14 @@ $connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
 if ( mysqli_connect_errno() ) {
 	die( mysqli_connect_error() );
 }
+
+function inputValuesVal($row) {
+	if (!isset($_POST[$row['Path'] . "Num"])) {
+		return 0;
+	} else {
+		return $_POST[$row['Path'] . "Num"];
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang = en>
@@ -62,13 +70,11 @@ if ( mysqli_connect_errno() ) {
 								$i = 0;
                                 while($row = mysqli_fetch_assoc($result))
                                 {
+																	echo "<br>";
 	                                echo "<input type='checkbox' class = 'form-check-input' name = 'breadbox[]' value='" .$row['Name'] . "'>" . $row['Name'];
-	                                echo "<select class='form-control' name = '" . $row['Name'] . "Amount' id = '" . $row['Name'] . "Amount'>";
-	                                for($j = 0; $j<=5; $j++)
-	                                {
-	                                 	echo "<option>$j</option>";
-	                                }
-	                                echo '</select> <br>';
+																	echo "<br>";
+	                                echo "<input type='number' class='form-control' name = '" . $row['Name'] . "Amount' id = '" . $row['Name'] . "Amount' value=" . inputValuesVal($row) . ">";
+	                                echo '<br>';
 	                                if($i == 3){
 	                                	echo '</div>';
 	                                	echo '<div class="group">';
@@ -84,7 +90,6 @@ if ( mysqli_connect_errno() ) {
                         echo '</div>';
                     echo '<input type="submit" name="submit" class="btn btn-primary">';
                     echo '</div>'
-						
 					?>
 					</fieldset>
 				</form>
