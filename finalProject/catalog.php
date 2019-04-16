@@ -1,25 +1,24 @@
 <?php
 define('DBHOST', 'localhost');
-define('DBName', 'id9307686_bread');
+define('DBNAME', 'id9307686_bread');
 define('DBUSER', 'id9307686_breaduser');
 define('DBPASS', '12345');
-define('DBCONNSTRING', 'mysql:host=localhost;dbname=id9307686_bread;charset=utf8mb4;');
+define('DBCONNSTRING', 'mysql:dbname=bread;charset=utf8mb4;');
 
 function fillCatalog($catalog, $counter) {
+	$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+	if (mysqli_connect_errno()) {
+		die(mysqli_connect_error());
+	}
+
 	$rowCount = 0;
-
-	try {
-		$pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS);
-		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-		$sql = 'select * from ' . $catalog;
-		$result = $pdo -> query($sql);
-		while ($row = $result -> fetch()) {
+	$sql = 'select * from ' . $catalog;
+	if($result = mysqli_query($connection, $sql)) {
+		while ($row = mysqli_fetch_assoc($result)) {
 			//CREATE NEW ROW AFTER 2 ENTRIES IN CURRENT ROW
 			if ($rowCount % 2 == 0) {
 				echo '<div class="row">';
 			}
-
 			echo '<div class="col-md-6">';
 			echo '<div class="panel-group">';
 			echo '<div class="panel panel-default" id="' . $row['Name'] . '">';
@@ -45,7 +44,8 @@ function fillCatalog($catalog, $counter) {
 				echo '</div>';
 			}
 		}
-		$pdo = null;
+		mysqli_free_result($result);
+		}
 		echo '<div class="col-md-6">';
 		echo '<div class="panel panel-default">';
 		echo '<div class="panel-body">';
@@ -53,22 +53,18 @@ function fillCatalog($catalog, $counter) {
 		echo '</div>';
 		echo '</div>';
 		echo '</div>';
-	} catch (PDOException $e) {
-		echo 'database connection failed...';
-		die($d -> getMessage($e));
-	}
 }
 
 function fillCart($catalog) {
+	$connection = mysqli_connect(DBHOST, DBUSER, DBPASS, DBNAME);
+	if (mysqli_connect_errno()) {
+		die(mysqli_connect_error());
+	}
+
 	$rowCount = 0;
-
-	try {
-		$pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS);
-		$pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-		$sql = 'select * from ' . $catalog;
-		$result = $pdo -> query($sql);
-		while ($row = $result -> fetch()) {
+	$sql = 'select * from ' . $catalog;
+	if ($result = mysqli_query($connection, $sql)) {
+		while ($row = mysqli_fetch_assoc($result)) {
 			if ($rowCount % 2 == 0) {
 				echo '<div class="row">';
 			}
@@ -79,10 +75,7 @@ function fillCart($catalog) {
 				echo '</div>';
 			}
 		}
-		$pdo = null;
-	} catch (PDOException $e) {
-		echo 'database connection failed...';
-		die($d -> getMessage());
+		mysqli_free_result($result);
 	}
 }
 ?>
@@ -150,7 +143,7 @@ function fillCart($catalog) {
 		<div class="row">
 			<div class="col-md-9">
 				<?php
-					fillCatalog("catalogClassic", 0);
+					fillCatalog("CatalogClassic", 0);
 				?>
 				</div>
 			</div>
@@ -164,7 +157,7 @@ function fillCart($catalog) {
 						<form action="order.php" method="post">
 							<br>
 							<?php
-							fillCart("catalogClassic");
+							fillCart("CatalogClassic");
 							?>
 								<div class="col-md-6">
 									<br><button type="submit" class="btn btn-primary">Submit</button>
